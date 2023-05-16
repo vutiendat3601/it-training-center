@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class LearnerLoginReq implements Serializable {
+public class EmailPwdLoginReq implements Serializable {
     private String email;
 
     private String password;

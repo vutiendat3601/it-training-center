@@ -12,10 +12,10 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
+import com.datvutech.ittrainingcenter.constant.Role;
 import com.datvutech.ittrainingcenter.exception.ExceptionMessages;
 import com.datvutech.ittrainingcenter.persistence.entity.User;
 import com.datvutech.ittrainingcenter.persistence.repository.UserRepository;
-import com.datvutech.ittrainingcenter.persistence.type.UserRole;
 import com.datvutech.ittrainingcenter.service.MailService;
 import com.datvutech.ittrainingcenter.service.UserService;
 import com.datvutech.ittrainingcenter.service.model.MailDetail;
@@ -50,13 +50,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User registerLearner(User userReq) {
+    public User register(User userReq) {
         Optional<User> exsitence = userRepo.findByEmail(userReq.getEmail());
         if (exsitence.isPresent()) {
             throw new RuntimeException(exMessages.getMessage("EMAIL_WAS_TAKEN"));
         }
         userReq.setUserUuid(UUID.randomUUID().toString());
-        userReq.setRole(UserRole.LEARNER);
+        userReq.setRole(Role.ROLE_LEARNER);
         userReq.setEmailVerificationCode(RandomString.make(verificationCodeLength));
         User userResp = userRepo.save(userReq);
         sendConfirmationMail(userResp);
@@ -78,7 +78,7 @@ public class UserServiceImpl implements UserService {
             e.printStackTrace();
         }
         String confirmLink = appWebsite + "/verify?code=" + userReq.getEmailVerificationCode();
-        String newConfirmLink = appWebsite + "/re-verify?uuid=" + userReq.getUserUuid();
+        String newConfirmLink = appWebsite + "/re-verify?email=" + userReq.getEmail();
         String content = contentBuilder.toString();
         content = content.replace("${app-name}", appName);
         content = content.replace("${app-website}", appWebsite);

@@ -6,7 +6,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 
-import com.datvutech.ittrainingcenter.persistence.type.UserRole;
+import com.datvutech.ittrainingcenter.constant.Role;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -35,5 +35,5 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role_id")
-    private UserRole role;
+    private Role role;
 }

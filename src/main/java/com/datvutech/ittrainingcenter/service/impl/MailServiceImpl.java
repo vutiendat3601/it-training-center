@@ -29,6 +29,7 @@ public class MailServiceImpl implements MailService {
             messageHelper.setTo(mailDetail.getToAddress());
             messageHelper.setSubject(mailDetail.getSubject());
             messageHelper.setText(mailDetail.getContent(), true);
+
         } catch (MessagingException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {

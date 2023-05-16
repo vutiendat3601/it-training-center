@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.datvutech.ittrainingcenter.controller.model.request.LearnerRegisterReq;
+import com.datvutech.ittrainingcenter.controller.model.request.RegisterReq;
 import com.datvutech.ittrainingcenter.persistence.entity.User;
 import com.datvutech.ittrainingcenter.service.UserService;
 import com.datvutech.ittrainingcenter.validation.annotation.ConfirmPassword;
@@ -31,14 +31,14 @@ public class CustomerController {
     }
 
     @GetMapping("/register")
-    public String register(Model model) {
-        model.addAttribute("learnerRegister", new LearnerRegisterReq());
+    public String showRegisterForm(Model model) {
+        model.addAttribute("register", new RegisterReq());
         return "auth/register";
     }
 
     @PostMapping("/register")
-    public String registerLearner(
-            @Valid @ModelAttribute("learnerRegister") LearnerRegisterReq learnerRegister,
+    public String performRegister(
+            @Valid @ModelAttribute("register") RegisterReq register,
             BindingResult validResult, Model model) {
 
         if (validResult.hasErrors()) {
@@ -50,10 +50,9 @@ public class CustomerController {
             }
             return "auth/register";
         }
-        User userReq = mapper.map(learnerRegister, User.class);
-        userReq.setPwd(passEncoder.encode(learnerRegister.getPassword()));
-        /* model.addAttribute("learnerRegister", new LearnerRegisterReq()); */
-        User userResp = userService.registerLearner(userReq);
+        User userReq = mapper.map(register, User.class);
+        userReq.setPwd(passEncoder.encode(register.getPassword()));
+        User userResp = userService.register(userReq);
         model.addAttribute("message", """
                 Tài khoản %s đã được đăng ký thành công!
                 Vui lòng kiểm tra hộp thư mail xác thực địa chỉ email.

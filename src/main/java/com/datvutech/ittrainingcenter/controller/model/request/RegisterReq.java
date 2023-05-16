@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @ConfirmPassword(message = "Mật khẩu không khớp")
-public class LearnerRegisterReq extends ConfirmPasswordModel implements Serializable {
+public class RegisterReq extends ConfirmPasswordModel implements Serializable {
     @NotBlank(message = "Tên không được để trống.")
     @Length(max = 12, message = "Tên chứa tối đa 12 kí tự.")
     private String firstName;

@@ -9,15 +9,14 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Login</title>
+    <title>IT Training Center - Login</title>
 
     <!-- Custom fonts for this template-->
     <link th:href="@{/sb-admin-2/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
-    <link th:href="@{/sb-admin-2/font/google-font.css}" rel="stylesheet" type="text/css">
-    
+    <link th:href="@{/sb-admin-2/font/google-font.css}">
 
     <!-- Custom styles for this template-->
-    <link th:href="@{/sb-admin-2/css/sb-admin-2.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/sb-admin-2/css/sb-admin-2.min.css}" rel="stylesheet">
 </head>
 
 <body class="bg-gradient-primary">
@@ -39,20 +38,28 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Chào mừng trở lại!</h1>
                                     </div>
-                                    <form th:action="@{/login}" method="post" class="user" >
+                                    <form th:action="@{/login}" method="post" class="user">
+
+                                        <!-- Invalid username and password. -->
+                                        <p class="text-center text-danger small mb-2" th:if="${param.error}">
+                                            Sai email hoặc mật khẩu.</p>
+                                        <!-- Logged out successful -->
+                                        <p class="text-center text-danger small mb-2" th:if="${param.logout}">
+                                            Đăng xuất thành công.</p>
                                         <div class="form-group">
                                             <input name="username" type="email" class="form-control form-control-user"
-                                                id="email" aria-describedby="emailHelp"
-                                                placeholder="Địa chỉ email...">
+                                                id="email" aria-describedby="emailHelp" placeholder="Địa chỉ email...">
                                         </div>
                                         <div class="form-group">
-                                            <input name="password" type="password" class="form-control form-control-user"
-                                                id="password" placeholder="Password">
+                                            <input name="password" type="password"
+                                                class="form-control form-control-user" id="password"
+                                                placeholder="Password">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
                                                 <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Nhớ mật khẩu</label>
+                                                <label class="custom-control-label" for="customCheck">Nhớ mật
+                                                    khẩu</label>
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
@@ -85,15 +92,15 @@
 
     </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script th:src="@{sb-admin-2/vendor/jquery/jquery.min.js}"></script>
-    <script th:src="@{sb-admin-2/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+   <!-- Bootstrap core JavaScript-->
+   <script th:src="@{/sb-admin-2/vendor/jquery/jquery.min.js}"></script>
+   <script th:src="@{/sb-admin-2/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script th:src="@{sb-admin-2/vendor/jquery-easing/jquery.easing.min.js}"></script>
+   <!-- Core plugin JavaScript-->
+   <script th:src="@{/sb-admin-2/vendor/jquery-easing/jquery.easing.min.js}"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script th:src="@{sb-admin-2/js/sb-admin-2.min.js}"></script>
+   <!-- Custom scripts for all pages-->
+   <script th:src="@{/sb-admin-2/js/sb-admin-2.min.js}"></script>
 
 </body>
 

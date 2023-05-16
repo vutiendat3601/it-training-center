@@ -52,9 +52,9 @@ public class AuthServiceImpl implements AuthService {
                 authorities.add(new SimpleGrantedAuthority(user.getRole().toString()));
                 return new UsernamePasswordAuthenticationToken(email, password, authorities);
             }
-            throw new BadCredentialsException("Invalid password!");
+            throw new BadCredentialsException(exMessages.getMessage("INVALID_PASSWORD"));
         }
-        throw new BadCredentialsException("No user registered with this details!");
+        throw new BadCredentialsException(exMessages.getMessage("USER_NOT_FOUND"));
     }
 
     @Override
